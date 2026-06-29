@@ -1,0 +1,24 @@
+dataset: roman_empire
+selection: oracle
+seed: 1
+paths:
+  feature_mlp:
+    config: configs/oracle/roman_empire_mlp_long.yaml
+    variant: mlp
+    regime: feature
+  compat_mlp:
+    config: configs/oracle/roman_empire_compat_mlp_long.yaml
+    variant: mlp
+    regime: feature
+  deep_gcn:
+    config: configs/oracle/roman_empire_deep_gcn_long.yaml
+    variant: deep_gcn
+    regime: structure
+  sparse_sir:
+    config: configs/oracle/roman_empire_sir_sparse.yaml
+    variant: expert_ce
+    regime: view_risk
+  dense_sir:
+    config: configs/oracle/roman_empire_sir_dense.yaml
+    variant: expert_ce
+    regime: view_risk

@@ -1,0 +1,75 @@
+dataset:
+  name: minesweeper
+  type: heterophily_npz
+  metric: auroc
+  data_dir: data/raw/node/minesweeper
+  file_name: minesweeper.npz
+model:
+  hidden_dim: 128
+  proj_dim: 64
+  K: 2
+  dropout: 0.30
+  hop_k: 2
+  structural_cap: 24
+  knn_k: 18
+  n_clusters: 64
+  gate_mode: reliability
+  fusion_mode: logits
+  gate_detach_inputs: true
+  reliability_entropy_bias: 0.30
+  gate_temperature: 0.9
+  gate_residual: 0.00
+  regime_temperature: 0.8
+  regime_topk: 0
+  regime_sharpen_power: 1.5
+  enabled_views: [feature_knn, prototype]
+  direct_experts: [feature_mlp, raw_gcn]
+  raw_gcn_layers: 4
+  raw_gcn_residual: true
+  raw_gcn_norm: layer
+  raw_gcn_self_loop: true
+  raw_gcn_adj_norm: row
+  regime_groups:
+    view_risk: [feature_knn, prototype]
+    feature: [feature_mlp]
+    structure: [raw_gcn]
+  regime_prior:
+    view_risk: 0.15
+    feature: 0.10
+    structure: 0.75
+  view_gate_prior:
+    feature_knn: 0.10
+    prototype: 0.10
+    feature_mlp: 0.15
+    raw_gcn: 0.65
+  prototype_method: kmeans
+  prototype_soft_topk: 3
+loss:
+  label_smoothing: 0.02
+  lambda_view_ce: 0.10
+  lambda_gate_supervision: 1.00
+  gate_supervision_warmup: 50
+  gate_supervision_temperature: 0.7
+  lambda_gate_entropy: 0.00
+  lambda_align: 0.0
+  lambda_var: 0.0
+  lambda_elastic: 0.0
+  variance_gamma: 1.0
+  elastic_margin: 0.10
+  max_elastic_pairs: 0
+  neg_margin: 0.8
+  distill_warmup_epochs: 1000
+  distill_temperature: 1.8
+optim:
+  lr: 0.002
+  weight_decay: 0.0002
+train:
+  epochs: 400
+  patience: 100
+  grad_clip: 5.0
+  selection: oracle
+  expert_pretrain_epochs: 50
+  freeze_experts_after_pretrain: false
+seed: 1
+seeds: [1]
+

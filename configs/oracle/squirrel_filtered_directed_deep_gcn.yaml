@@ -1,0 +1,28 @@
+dataset:
+  name: squirrel_filtered_directed
+  type: heterophily_npz
+  data_dir: data/raw/node/squirrel_filtered_directed
+  file_name: squirrel_filtered_directed.npz
+  to_undirected: false
+model:
+  model_type: deep_gcn
+  hidden_dim: 256
+  num_layers: 4
+  dropout: 0.70
+  residual: true
+  norm: batch
+  self_loop: true
+  adj_norm: row
+  use_reverse_edges: true
+loss:
+  label_smoothing: 0.02
+optim:
+  lr: 0.01
+  weight_decay: 0.0001
+train:
+  epochs: 520
+  patience: 120
+  grad_clip: 5.0
+  selection: oracle
+seed: 0
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]

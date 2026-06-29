@@ -1,0 +1,51 @@
+dataset:
+  name: cora
+  type: citation
+  data_dir: data/raw/cora
+  train_per_class: 20
+  val_size: 500
+  test_size: 1000
+model:
+  hidden_dim: 128
+  proj_dim: 64
+  K: 3
+  dropout: 0.3
+  hop_k: 2
+  structural_cap: 32
+  knn_k: 10
+  n_clusters: 32
+  gate_temperature: 2.0
+  gate_residual: 0.15
+  enabled_views:
+  - structural
+  - feature_knn
+  - prototype
+  view_gate_prior:
+    structural: 0.45
+    feature_knn: 0.35
+    prototype: 0.2
+  prototype_method: kmeans
+  prototype_soft_topk: 2
+loss:
+  lambda_align: 0.35
+  lambda_var: 0.1
+  lambda_elastic: 0.15
+  variance_gamma: 1.0
+  elastic_margin: 0.12
+  max_elastic_pairs: 8000
+  neg_margin: 0.8
+  distill_warmup_epochs: 15
+  distill_temperature: 1.5
+optim:
+  lr: 0.003
+  weight_decay: 0.0005
+train:
+  epochs: 100
+  patience: 25
+  grad_clip: 5.0
+  selection: oracle
+seed: 0
+seeds:
+- 0
+- 1
+- 2

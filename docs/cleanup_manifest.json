@@ -1,0 +1,30 @@
+{
+  "candidate_entries_scanned": 857,
+  "datasets_kept": 16,
+  "result_files": [
+    "actor.json",
+    "amazon_ratings.json",
+    "amherst41.json",
+    "best_results.json",
+    "best_results.md",
+    "chameleon.json",
+    "chameleon_filtered.json",
+    "chameleon_filtered_directed.json",
+    "cora.json",
+    "cornell.json",
+    "minesweeper.json",
+    "reed98.json",
+    "roman_empire.json",
+    "squirrel_filtered.json",
+    "squirrel_filtered_directed.json",
+    "story.md",
+    "texas.json",
+    "tolokers.json",
+    "wisconsin.json"
+  ],
+  "removed_after_generation": [
+    "records",
+    "combo_runs",
+    "__pycache__ directories"
+  ]
+}

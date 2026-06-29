@@ -1,0 +1,88 @@
+dataset:
+  name: cornell
+  type: webkb
+  data_dir: data/raw/node/cornell
+  train_per_class: 8
+  val_size: 36
+  test_size: 107
+  use_official_splits: true
+model:
+  model_type: risk_router
+  hidden_dim: 128
+  proj_dim: 64
+  K: 2
+  dropout: 0.25
+  hop_k: 2
+  structural_cap: 20
+  knn_k: 8
+  n_clusters: 16
+  enabled_views:
+  - structural
+  - feature_knn
+  - prototype
+  prototype_method: kmeans
+  prototype_soft_topk: 3
+  utility_shared_stem: true
+  risk_feature_dim: 4
+  path_logit_calibration: false
+  raw_gcn_layers: 3
+  raw_gcn_residual: true
+  raw_gcn_norm: layer
+  raw_gcn_self_loop: true
+  raw_gcn_adj_norm: row
+  view_gate_temperature: 0.7
+  view_gate_topk: 1
+  view_gate_sharpen_power: 2.0
+  view_reliability_entropy_bias: 0.45
+  view_gate_prior:
+    structural: 0.2
+    feature_knn: 0.45
+    prototype: 0.35
+  route_temperature: 0.8
+  route_topk: 1
+  route_sharpen_power: 1.5
+  route_detach_inputs: true
+  final_detach_mode: none
+  path_fusion: mixture
+  route_prior:
+    view_risk: 0.95
+    feature: 0.03
+    structure: 0.02
+loss:
+  label_smoothing: 0.0
+  pretrain_lambda_path_ce: 1.0
+  pretrain_lambda_view_ce: 1.0
+  lambda_final_ce: 1.0
+  lambda_path_ce: 0.0
+  lambda_view_ce: 0.0
+  lambda_router_path_ce: 1.0
+  router_path_ce_warmup: 30
+  router_path_ce_detach_route: true
+  router_path_ce_floor: 0.0
+  lambda_route_supervision: 0.75
+  route_supervision_warmup: 30
+  route_supervision_temperature: 0.7
+  lambda_route_entropy: 0.0
+  elastic_margin: 0.12
+  max_elastic_pairs: 0
+  lambda_gate_supervision: 1.2
+  gate_supervision_warmup: 30
+  gate_supervision_temperature: 0.5
+  lambda_gate_entropy: 0.02
+optim:
+  lr: 0.003
+  weight_decay: 0.0002
+train:
+  epochs: 180
+  patience: 70
+  grad_clip: 5.0
+  selection: oracle
+  expert_pretrain_epochs: 30
+  save_routing_diagnostics: true
+  pretrain_view_path_only: true
+  restore_view_rng_after_init: true
+  freeze_view_path_after_pretrain: false
+  freeze_view_experts_after_pretrain: true
+seed: 0
+seeds:
+- 0

@@ -1,0 +1,56 @@
+dataset:
+  name: roman_empire
+  type: heterophily_npz
+  data_dir: data/raw/node/roman_empire
+  file_name: roman_empire.npz
+model:
+  hidden_dim: 64
+  proj_dim: 32
+  K: 1
+  dropout: 0.35
+  hop_k: 2
+  structural_cap: 48
+  knn_k: 15
+  n_clusters: 64
+  gate_mode: reliability
+  fusion_mode: logits
+  gate_detach_inputs: true
+  reliability_entropy_bias: 0.40
+  gate_temperature: 0.8
+  gate_residual: 0.00
+  gate_topk: 1
+  gate_sharpen_power: 2.0
+  enabled_views: [feature_knn, prototype]
+  view_gate_prior:
+    feature_knn: 0.60
+    prototype: 0.40
+  prototype_method: kmeans
+  prototype_soft_topk: 3
+loss:
+  lambda_view_ce: 0.00
+  lambda_gate_supervision: 1.00
+  gate_supervision_warmup: 15
+  gate_supervision_temperature: 0.7
+  lambda_gate_entropy: 0.01
+  lambda_align: 0.10
+  lambda_var: 0.05
+  lambda_elastic: 0.30
+  variance_gamma: 1.0
+  elastic_margin: 0.08
+  max_elastic_pairs: 20000
+  neg_margin: 0.8
+  distill_warmup_epochs: 1000
+  distill_temperature: 2.0
+optim:
+  lr: 0.003
+  weight_decay: 0.0005
+train:
+  selection: oracle
+  expert_pretrain_epochs: 15
+  freeze_experts_after_pretrain: true
+  epochs: 60
+  patience: 15
+  grad_clip: 5.0
+seed: 0
+seeds: [0, 1, 2]
+

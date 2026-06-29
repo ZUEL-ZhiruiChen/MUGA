@@ -1,0 +1,48 @@
+dataset:
+  name: chameleon_filtered_directed
+  type: heterophily_npz
+  data_dir: data/raw/node/chameleon_filtered_directed
+  file_name: chameleon_filtered_directed.npz
+  to_undirected: false
+model:
+  hidden_dim: 128
+  proj_dim: 64
+  K: 2
+  dropout: 0.35
+  hop_k: 2
+  structural_cap: 24
+  knn_k: 18
+  n_clusters: 48
+  gate_temperature: 1.8
+  gate_residual: 0.1
+  enabled_views:
+  - structural
+  - feature_knn
+  - prototype
+  view_gate_prior:
+    structural: 0.2
+    feature_knn: 0.5
+    prototype: 0.3
+  prototype_method: kmeans
+  prototype_soft_topk: 3
+loss:
+  lambda_align: 0.15
+  lambda_var: 0.05
+  lambda_elastic: 0.0
+  variance_gamma: 1.0
+  elastic_margin: 0.1
+  max_elastic_pairs: 0
+  neg_margin: 0.8
+  distill_warmup_epochs: 20
+  distill_temperature: 1.8
+optim:
+  lr: 0.003
+  weight_decay: 0.0005
+train:
+  epochs: 120
+  patience: 30
+  grad_clip: 5.0
+  selection: oracle
+seed: 13
+seeds:
+- 13

@@ -1,0 +1,27 @@
+dataset:
+  name: roman_empire
+  type: heterophily_npz
+  data_dir: data/raw/node/roman_empire
+  file_name: roman_empire.npz
+model:
+  model_type: deep_gcn
+  hidden_dim: 256
+  num_layers: 4
+  dropout: 0.35
+  residual: true
+  norm: layer
+  self_loop: true
+  adj_norm: row
+  use_reverse_edges: false
+optim:
+  lr: 0.002
+  weight_decay: 0.0002
+loss:
+  label_smoothing: 0.05
+train:
+  epochs: 500
+  patience: 120
+  grad_clip: 5.0
+  selection: oracle
+seed: 1
+seeds: [1]

@@ -1,0 +1,24 @@
+dataset: amazon_ratings
+selection: oracle
+seed: 2
+paths:
+  feature_mlp:
+    config: configs/oracle/amazon_ratings_mlp_xlong.yaml
+    variant: mlp
+    regime: feature
+  feature_pool:
+    config: configs/oracle/amazon_ratings_feature_pool.yaml
+    variant: expert_pool
+    regime: feature
+  flat_expert_pool:
+    config: configs/oracle/amazon_ratings_expert_pool.yaml
+    variant: expert_pool
+    regime: mixed
+  sparse_sir:
+    config: configs/oracle/amazon_ratings_sir_sparse.yaml
+    variant: expert_ce
+    regime: view_risk
+  dense_sir:
+    config: configs/oracle/amazon_ratings_sir_dense.yaml
+    variant: expert_ce
+    regime: view_risk

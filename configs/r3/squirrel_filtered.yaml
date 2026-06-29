@@ -1,0 +1,20 @@
+dataset: squirrel_filtered
+selection: oracle
+seed: 2
+paths:
+  isolated_sparse_sir:
+    config: configs/oracle/squirrel_filtered_sir_sparse.yaml
+    variant: expert_ce
+    regime: view_risk
+  flat_expert_pool:
+    config: configs/oracle/squirrel_filtered_expert_pool.yaml
+    variant: expert_pool
+    regime: mixed
+  no_feature_pool:
+    config: configs/oracle/squirrel_filtered_expert_pool_gcnonly.yaml
+    variant: expert_pool
+    regime: structure
+  forced_view_risk_router:
+    config: configs/oracle/squirrel_filtered_regime_router.yaml
+    variant: expert_pool
+    regime: view_risk

@@ -1,0 +1,24 @@
+dataset:
+  name: tolokers
+  type: heterophily_npz
+  metric: auroc
+  data_dir: data/raw/node/tolokers
+  file_name: tolokers.npz
+model:
+  model_type: mlp
+  hidden_dim: 128
+  num_layers: 4
+  dropout: 0.30
+  layer_norm: true
+optim:
+  lr: 0.001
+  weight_decay: 0.0002
+loss:
+  label_smoothing: 0.02
+train:
+  epochs: 200
+  patience: 50
+  grad_clip: 5.0
+  selection: oracle
+seed: 0
+seeds: [0]

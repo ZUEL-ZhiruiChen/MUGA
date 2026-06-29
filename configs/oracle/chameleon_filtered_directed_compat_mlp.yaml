@@ -1,0 +1,30 @@
+dataset:
+  name: chameleon_filtered_directed
+  type: heterophily_npz
+  data_dir: data/raw/node/chameleon_filtered_directed
+  file_name: chameleon_filtered_directed.npz
+  to_undirected: false
+model:
+  model_type: compat_mlp
+  hidden_dim: 256
+  num_layers: 3
+  dropout: 0.25
+  layer_norm: true
+  lp_steps: 4
+  lp_alpha: 0.25
+  lp_direction: both
+  lp_concat_steps: true
+  compat_smoothing: 0.2
+  lp_only: false
+loss:
+  label_smoothing: 0.02
+optim:
+  lr: 0.003
+  weight_decay: 0.0001
+train:
+  epochs: 500
+  patience: 120
+  grad_clip: 5.0
+  selection: oracle
+seed: 0
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]

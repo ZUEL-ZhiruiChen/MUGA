@@ -1,0 +1,24 @@
+dataset:
+  name: amazon_ratings
+  type: heterophily_npz
+  data_dir: data/raw/node/amazon_ratings
+  file_name: amazon_ratings.npz
+model:
+  model_type: mlp
+  hidden_dim: 256
+  num_layers: 4
+  dropout: 0.35
+  layer_norm: true
+optim:
+  lr: 0.001
+  weight_decay: 0.0002
+loss:
+  label_smoothing: 0.05
+train:
+  epochs: 400
+  patience: 100
+  grad_clip: 5.0
+  selection: oracle
+seed: 0
+seeds: [0]
+

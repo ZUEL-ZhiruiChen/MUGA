@@ -1,0 +1,86 @@
+dataset:
+  name: squirrel_filtered_directed
+  type: heterophily_npz
+  data_dir: data/raw/node/squirrel_filtered_directed
+  file_name: squirrel_filtered_directed.npz
+  to_undirected: false
+model:
+  model_type: risk_router
+  hidden_dim: 128
+  proj_dim: 64
+  K: 2
+  dropout: 0.35
+  hop_k: 2
+  structural_cap: 32
+  knn_k: 20
+  n_clusters: 64
+  enabled_views:
+  - structural
+  - feature_knn
+  - prototype
+  prototype_method: kmeans
+  prototype_soft_topk: 3
+  utility_shared_stem: true
+  risk_feature_dim: 4
+  path_logit_calibration: false
+  raw_gcn_layers: 3
+  raw_gcn_residual: true
+  raw_gcn_norm: layer
+  raw_gcn_self_loop: true
+  raw_gcn_adj_norm: row
+  view_gate_temperature: 0.8
+  view_gate_topk: 1
+  view_gate_sharpen_power: 2.0
+  view_reliability_entropy_bias: 0.4
+  view_gate_prior:
+    structural: 0.15
+    feature_knn: 0.55
+    prototype: 0.3
+  route_temperature: 0.8
+  route_topk: 1
+  route_sharpen_power: 1.5
+  route_detach_inputs: true
+  final_detach_mode: none
+  path_fusion: mixture
+  route_prior:
+    view_risk: 0.95
+    feature: 0.03
+    structure: 0.02
+loss:
+  label_smoothing: 0.0
+  pretrain_lambda_path_ce: 1.0
+  pretrain_lambda_view_ce: 1.0
+  lambda_final_ce: 1.0
+  lambda_path_ce: 0.0
+  lambda_view_ce: 0.0
+  lambda_router_path_ce: 1.0
+  router_path_ce_warmup: 30
+  router_path_ce_detach_route: true
+  router_path_ce_floor: 0.0
+  lambda_route_supervision: 0.75
+  route_supervision_warmup: 30
+  route_supervision_temperature: 0.7
+  lambda_route_entropy: 0.0
+  elastic_margin: 0.1
+  max_elastic_pairs: 0
+  lambda_gate_supervision: 1.0
+  gate_supervision_warmup: 25
+  gate_supervision_temperature: 0.7
+  lambda_gate_entropy: 0.01
+optim:
+  lr: 0.003
+  weight_decay: 0.0002
+train:
+  epochs: 220
+  patience: 80
+  grad_clip: 5.0
+  selection: oracle
+  expert_pretrain_epochs: 25
+  save_routing_diagnostics: true
+  pretrain_view_path_only: true
+  restore_view_rng_after_init: true
+  freeze_view_path_after_pretrain: false
+  freeze_view_experts_after_pretrain: true
+seed: 2
+seeds:
+- 2

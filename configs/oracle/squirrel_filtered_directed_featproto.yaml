@@ -1,0 +1,45 @@
+dataset:
+  name: squirrel_filtered_directed
+  type: heterophily_npz
+  data_dir: data/raw/node/squirrel_filtered_directed
+  file_name: squirrel_filtered_directed.npz
+  to_undirected: false
+model:
+  hidden_dim: 128
+  proj_dim: 64
+  K: 2
+  dropout: 0.30
+  refine: false
+  hop_k: 2
+  structural_cap: 32
+  knn_k: 24
+  n_clusters: 96
+  gate_temperature: 1.4
+  gate_residual: 0.05
+  enabled_views: [feature_knn, prototype]
+  view_gate_prior:
+    feature_knn: 0.60
+    prototype: 0.40
+  prototype_method: kmeans
+  prototype_soft_topk: 3
+loss:
+  lambda_view_ce: 0.25
+  lambda_align: 0.10
+  lambda_var: 0.03
+  lambda_elastic: 0.0
+  variance_gamma: 1.0
+  elastic_margin: 0.10
+  max_elastic_pairs: 0
+  neg_margin: 0.8
+  distill_warmup_epochs: 20
+  distill_temperature: 1.6
+optim:
+  lr: 0.003
+  weight_decay: 0.0002
+train:
+  epochs: 160
+  patience: 60
+  grad_clip: 5.0
+  selection: oracle
+seed: 0
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]

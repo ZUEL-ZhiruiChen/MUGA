@@ -1,0 +1,45 @@
+dataset:
+  name: cornell
+  type: webkb
+  data_dir: data/raw/node/cornell
+  train_per_class: 8
+  val_size: 36
+  test_size: 107
+  use_official_splits: true
+model:
+  hidden_dim: 128
+  proj_dim: 64
+  K: 2
+  dropout: 0.25
+  hop_k: 2
+  structural_cap: 20
+  knn_k: 8
+  n_clusters: 16
+  gate_temperature: 1.8
+  gate_residual: 0.10
+  enabled_views: [structural, feature_knn, prototype]
+  view_gate_prior:
+    structural: 0.20
+    feature_knn: 0.45
+    prototype: 0.35
+  prototype_method: kmeans
+  prototype_soft_topk: 3
+loss:
+  lambda_align: 0.20
+  lambda_var: 0.05
+  lambda_elastic: 0.15
+  variance_gamma: 1.0
+  elastic_margin: 0.12
+  max_elastic_pairs: 4000
+  neg_margin: 0.8
+  distill_warmup_epochs: 20
+  distill_temperature: 1.6
+optim:
+  lr: 0.003
+  weight_decay: 0.0005
+train:
+  epochs: 120
+  patience: 30
+  grad_clip: 5.0
+seed: 0
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]

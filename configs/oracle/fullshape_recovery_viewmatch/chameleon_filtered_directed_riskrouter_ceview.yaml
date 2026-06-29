@@ -1,0 +1,79 @@
+dataset:
+  name: chameleon_filtered_directed
+  type: heterophily_npz
+  data_dir: data/raw/node/chameleon_filtered_directed
+  file_name: chameleon_filtered_directed.npz
+  to_undirected: false
+model:
+  model_type: risk_router
+  hidden_dim: 128
+  proj_dim: 64
+  K: 2
+  dropout: 0.35
+  hop_k: 2
+  structural_cap: 24
+  knn_k: 18
+  n_clusters: 48
+  enabled_views:
+  - structural
+  - feature_knn
+  - prototype
+  prototype_method: kmeans
+  prototype_soft_topk: 3
+  utility_shared_stem: true
+  risk_feature_dim: 4
+  path_logit_calibration: false
+  raw_gcn_layers: 3
+  raw_gcn_residual: true
+  raw_gcn_norm: layer
+  raw_gcn_self_loop: true
+  raw_gcn_adj_norm: row
+  view_gate_temperature: 1.8
+  view_gate_topk: 0
+  view_gate_sharpen_power: 1.0
+  view_reliability_entropy_bias: 0.0
+  view_gate_prior:
+    structural: 0.2
+    feature_knn: 0.5
+    prototype: 0.3
+  route_temperature: 0.5
+  route_topk: 1
+  route_sharpen_power: 2.0
+  route_detach_inputs: true
+  final_detach_mode: none
+  path_fusion: mixture
+  route_prior:
+    view_risk: 0.995
+    feature: 0.003
+    structure: 0.002
+  view_gate_residual: 0.1
+  view_gate_mode: soft
+  view_fusion_mode: embedding
+  view_gate_detach_inputs: false
+loss:
+  label_smoothing: 0.0
+  lambda_final_ce: 1.0
+  lambda_path_ce: 0.0
+  lambda_view_ce: 0.0
+  lambda_router_path_ce: 0.0
+  lambda_route_supervision: 0.0
+  lambda_route_entropy: 0.0
+  elastic_margin: 0.1
+  max_elastic_pairs: 0
+optim:
+  lr: 0.003
+  weight_decay: 0.0005
+train:
+  epochs: 120
+  patience: 30
+  grad_clip: 5.0
+  selection: oracle
+  expert_pretrain_epochs: 0
+  save_routing_diagnostics: true
+  pretrain_view_path_only: false
+  restore_view_rng_after_init: false
+  freeze_view_path_after_pretrain: false
+  freeze_view_experts_after_pretrain: false
+seed: 13
+seeds:
+- 13

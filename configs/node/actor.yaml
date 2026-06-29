@@ -1,0 +1,44 @@
+dataset:
+  name: actor
+  type: actor
+  data_dir: data/raw/node/actor
+  train_per_class: 8
+  val_size: 1000
+  test_size: 3000
+  use_official_splits: true
+model:
+  hidden_dim: 128
+  proj_dim: 64
+  K: 2
+  dropout: 0.40
+  hop_k: 2
+  structural_cap: 32
+  knn_k: 15
+  n_clusters: 64
+  gate_temperature: 1.8
+  gate_residual: 0.10
+  enabled_views: [feature_knn, prototype]
+  view_gate_prior:
+    feature_knn: 0.60
+    prototype: 0.40
+  prototype_method: kmeans
+  prototype_soft_topk: 3
+loss:
+  lambda_align: 0.15
+  lambda_var: 0.05
+  lambda_elastic: 0.25
+  variance_gamma: 1.0
+  elastic_margin: 0.10
+  max_elastic_pairs: 12000
+  neg_margin: 0.8
+  distill_warmup_epochs: 25
+  distill_temperature: 1.8
+optim:
+  lr: 0.003
+  weight_decay: 0.0005
+train:
+  epochs: 120
+  patience: 30
+  grad_clip: 5.0
+seed: 0
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]

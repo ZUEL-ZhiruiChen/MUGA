@@ -1,0 +1,70 @@
+﻿dataset:
+  name: minesweeper
+  type: heterophily_npz
+  metric: auroc
+  data_dir: data/raw/node/minesweeper
+  file_name: minesweeper.npz
+model:
+  model_type: risk_router
+  hidden_dim: 128
+  proj_dim: 64
+  K: 2
+  dropout: 0.30
+  hop_k: 2
+  structural_cap: 24
+  knn_k: 18
+  n_clusters: 64
+  enabled_views: [feature_knn, prototype]
+  prototype_method: kmeans
+  prototype_soft_topk: 3
+  utility_shared_stem: true
+  risk_feature_dim: 4
+  path_logit_calibration: true
+  raw_gcn_layers: 4
+  raw_gcn_residual: true
+  raw_gcn_norm: layer
+  raw_gcn_self_loop: true
+  raw_gcn_adj_norm: row
+  view_gate_temperature: 0.9
+  view_gate_topk: 0
+  view_gate_sharpen_power: 1.0
+  view_reliability_entropy_bias: 0.30
+  view_gate_prior:
+    feature_knn: 0.50
+    prototype: 0.50
+  route_temperature: 0.8
+  route_topk: 2
+  route_sharpen_power: 1.5
+  route_detach_inputs: true
+  final_detach_mode: none
+  path_fusion: mixture
+  route_prior:
+    view_risk: 0.02
+    feature: 0.10
+    structure: 0.88
+loss:
+  label_smoothing: 0.02
+  pretrain_lambda_path_ce: 1.00
+  pretrain_lambda_view_ce: 1.00
+  lambda_final_ce: 1.00
+  lambda_path_ce: 0.50
+  lambda_view_ce: 0.10
+  lambda_route_supervision: 0.75
+  route_supervision_warmup: 50
+  route_supervision_temperature: 0.7
+  lambda_route_entropy: 0.00
+  elastic_margin: 0.10
+  max_elastic_pairs: 0
+optim:
+  lr: 0.002
+  weight_decay: 0.0002
+train:
+  epochs: 400
+  patience: 100
+  grad_clip: 5.0
+  selection: oracle
+  expert_pretrain_epochs: 50
+  save_routing_diagnostics: true
+seed: 1
+seeds: [1]
+

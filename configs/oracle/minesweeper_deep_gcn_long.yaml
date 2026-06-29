@@ -1,0 +1,28 @@
+dataset:
+  name: minesweeper
+  type: heterophily_npz
+  metric: auroc
+  data_dir: data/raw/node/minesweeper
+  file_name: minesweeper.npz
+model:
+  model_type: deep_gcn
+  hidden_dim: 128
+  num_layers: 4
+  dropout: 0.30
+  residual: true
+  norm: layer
+  self_loop: true
+  adj_norm: row
+optim:
+  lr: 0.002
+  weight_decay: 0.0002
+loss:
+  label_smoothing: 0.02
+train:
+  epochs: 400
+  patience: 100
+  grad_clip: 5.0
+  selection: oracle
+seed: 0
+seeds: [0]
+

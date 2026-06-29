@@ -1,0 +1,24 @@
+dataset: minesweeper
+selection: oracle
+seed: 1
+paths:
+  feature_mlp:
+    config: configs/oracle/minesweeper_mlp_strong.yaml
+    variant: mlp
+    regime: feature
+  deep_gcn:
+    config: configs/oracle/minesweeper_deep_gcn_long.yaml
+    variant: deep_gcn
+    regime: structure
+  flat_expert_pool:
+    config: configs/oracle/minesweeper_expert_pool.yaml
+    variant: expert_pool
+    regime: mixed
+  regime_router:
+    config: configs/oracle/minesweeper_regime_router.yaml
+    variant: expert_pool
+    regime: mixed
+  sparse_sir:
+    config: configs/oracle/minesweeper_sir_sparse.yaml
+    variant: expert_ce
+    regime: view_risk

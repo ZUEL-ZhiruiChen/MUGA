@@ -1,0 +1,24 @@
+dataset: tolokers
+selection: oracle
+seed: 2
+paths:
+  feature_mlp:
+    config: configs/oracle/tolokers_mlp_long.yaml
+    variant: mlp
+    regime: feature
+  feature_pool:
+    config: configs/oracle/tolokers_feature_pool.yaml
+    variant: expert_pool
+    regime: feature
+  flat_expert_pool:
+    config: configs/oracle/tolokers_expert_pool.yaml
+    variant: expert_pool
+    regime: mixed
+  regime_router:
+    config: configs/oracle/tolokers_regime_router_long.yaml
+    variant: regime_router_long
+    regime: mixed
+  sparse_sir:
+    config: configs/oracle/tolokers_sir_sparse.yaml
+    variant: expert_ce
+    regime: view_risk
