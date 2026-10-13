@@ -1,6 +1,6 @@
-# MVHGCL
+# MUGA
 
-This repository contains the implementation of **MVHGCL**, a multi-view hypergraph representation learning framework for node classification. The model constructs multiple complementary hypergraph views and fuses them through a node-level reliability gating mechanism.
+This repository contains the implementation of **MUGA**, a multi-view hypergraph representation learning framework for node classification. The model constructs multiple complementary hypergraph views and fuses them through a node-level reliability gating mechanism.
 
 ## Framework
 
