@@ -115,4 +115,4 @@ Commonly used datasets include `chameleon_filtered`, `squirrel_filtered`, `texas
 
 ## Citation
 
-If this repository is useful for your research, please cite the corresponding MVHGCL paper.
+If this repository is useful for your research, please cite the corresponding MUGA paper.
